@@ -71,7 +71,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-4 md:gap-8 text-[11px] font-mono tracking-[0.2em] uppercase">
-            <div className="hidden xl:flex items-center gap-6">
+            <div className="hidden lg:flex items-center gap-6">
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5 text-[9px] font-mono text-white/30 mr-4 lowercase">
                 <span className="text-primary">⌘+K</span> Quick_Search
               </div>
