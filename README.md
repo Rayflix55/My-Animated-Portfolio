@@ -6,6 +6,8 @@ A polished, production-ready portfolio built with React 19, Vite, and Tailwind C
 
 We've implemented a series of high-end features to elevate the user experience:
 
+- **Command Palette (⌘+K)**: A pro-level navigation terminal that allows users to jump between sections using keyboard shortcuts, enhancing the "Rayflix.OS" experience.
+- **Dynamic Theming (System Accents)**: An interactive theme switcher that lets users customize the primary accent color of the entire OS (Cyan, Emerald, Purple, etc.).
 - **Performance-Optimized Smooth Scroll**: Integrated `@studio-freight/lenis` with custom configurations for a fluid, high-refresh-rate scrolling experience (optimized for 90Hz+ displays).
 - **Glassmorphic Navbar**: A fixed, responsive navigation bar that adapts its appearance on scroll and features a custom mobile "Terminal" menu.
 - **Smooth Anchor Links**: Implemented custom scroll-to-section logic that accounts for fixed headers, providing a seamless landing experience for every nav item.
@@ -56,4 +58,3 @@ The output will be in the `dist/` folder.
 - `src/lib/`: Utility functions and shared logic.
 - `src/index.css`: Global styles and Tailwind configuration.
 - `src/App.tsx`: Main application assembly.
-# My-Animated-Portfolio

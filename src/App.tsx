@@ -6,6 +6,8 @@
 import { SmoothScroll } from "./components/SmoothScroll";
 import { Navbar } from "./components/Navbar";
 import { CustomCursor } from "./components/CustomCursor";
+import { ThemeToggle } from "./components/ThemeToggle";
+import { CommandPalette } from "./components/CommandPalette";
 import { Hero } from "./components/Hero";
 import { AboutMe } from "./components/AboutMe";
 import { Experience } from "./components/Experience";
@@ -19,6 +21,8 @@ export default function App() {
   return (
     <SmoothScroll>
       <CustomCursor />
+      <CommandPalette />
+      <ThemeToggle />
       <div className="noise-overlay" />
       <div className="relative min-h-screen bg-background selection:bg-primary selection:text-black overflow-x-hidden">
         {/* Background Grid & Blurs */}
