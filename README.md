@@ -56,3 +56,4 @@ The output will be in the `dist/` folder.
 - `src/lib/`: Utility functions and shared logic.
 - `src/index.css`: Global styles and Tailwind configuration.
 - `src/App.tsx`: Main application assembly.
+# My-Animated-Portfolio
