@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			// Robust fix for "Cannot set property fetch of #<Window> which has only a getter"
+			(function() {
+				const originalFetch = window.fetch;
+				try {
+					Object.defineProperty(window, 'fetch', {
+						value: originalFetch,
+						writable: true,
+						configurable: true,
+						enumerable: true
+					});
+				} catch (e) {
+					console.warn('SvelteKit fetch fix attempt 1 failed:', e);
+					try {
+						// Try to define on Window prototype if direct definition fails
+						const winProto = Object.getPrototypeOf(window);
+						if (winProto && winProto !== Object.prototype) {
+							Object.defineProperty(winProto, 'fetch', {
+								value: originalFetch,
+								writable: true,
+								configurable: true
+							});
+						}
+					} catch (e2) {
+						console.error('SvelteKit fetch fix attempt 2 failed:', e2);
+					}
+				}
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

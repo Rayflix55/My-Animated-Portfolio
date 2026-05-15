@@ -1,0 +1,1 @@
+import{c as p,l,a as c,b as n,f as m}from"../chunks/DMSi3rMC.js";import{e as i,p as _,a as f,F as e}from"../chunks/B88wLd0Q.js";i();a[e]="src/routes/+page.svelte";var g=n(m('<h1 class="text-white p-20">Minimal Svelte Test</h1>'),a[e],[[1,0]]);function a(t,s){p(new.target),_(s,!1,a);var o={...l()},r=g();return c(t,r),f(o)}export{a as component};

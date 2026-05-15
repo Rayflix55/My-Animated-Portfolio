@@ -38,14 +38,22 @@ The user mentioned running `pnpm install`. If you haven't, run:
 pnpm install
 ```
 
-### 3. Run Development Server
+### 3. Environment Variables
+Check `.env.example` for any required keys. If you use the Gemini AI features:
+1. Create a `.env` file in the root directory.
+2. Add your Gemini API Key:
+   ```env
+   GEMINI_API_KEY=your_key_here
+   ```
+
+### 4. Run Development Server
 Start the project locally to see your changes in real-time:
 ```bash
 pnpm dev
 ```
 The application will be available at `http://localhost:3000`.
 
-### 4. Production Build
+### 5. Production Build
 To create a optimized production build:
 ```bash
 pnpm build
