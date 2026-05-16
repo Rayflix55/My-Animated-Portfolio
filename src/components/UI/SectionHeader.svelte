@@ -1,13 +1,12 @@
 <script>
   import { cn } from "$lib/utils";
-  import { fly, fade } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
 
-  let { title, subtitle, class: className = "" } = $props();
+  let { title, subtitle, class: className = "", titleSize = "text-3xl sm:text-xl md:text-4xl lg:text-6xl" } = $props();
   let visible = $state(false);
 
   onMount(() => {
-    // Simple intersection observer to mimic whileInView
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) visible = true;
     }, { threshold: 0.1 });
@@ -32,7 +31,7 @@
   {#if visible}
     <h2
       in:fly={{ y: 20, duration: 800, delay: 100, opacity: 0 }}
-      class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black tracking-tighter text-gradient"
+      class={cn(titleSize, "font-display font-black tracking-tighter text-gradient")}
     >
       {title}
     </h2>

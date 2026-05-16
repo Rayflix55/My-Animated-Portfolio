@@ -50,12 +50,12 @@
     title="Work Process" 
   />
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1 min-h-[600px] perspective-2000">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-1 min-h-[600px] perspective-2000">
     {#each steps as step, i}
       <div style:transform="translateY({getY(i, scrollYProgress)}px)" class="h-full transition-transform">
         <div class="engineered-border bg-white/[0.01] hover:bg-white/[0.03] p-10 h-full transition-all group relative overflow-hidden text-left hover:scale-[1.01] active:scale-95">
           <div class="text-primary font-mono text-xs mb-8 tracking-widest italic group-hover:text-white transition-colors">INIT_STEP_{step.num}</div>
-          <h3 class="text-3xl font-display font-black uppercase tracking-tighter mb-4">{step.title}</h3>
+       <h3 class="text-base sm:text-lg md:text-xl lg:text-[20px] font-display font-black uppercase tracking-tighter mb-4">{step.title}</h3>
           <p class="text-white/40 text-sm font-light leading-relaxed mb-8">{step.desc}</p>
           
           <div class="absolute bottom-[-10%] right-[-5%] text-white/5 text-[10rem] font-display font-black italic tracking-tighter transition-all group-hover:text-primary/5">

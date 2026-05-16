@@ -50,7 +50,7 @@
 
           <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
             <div class="text-left">
-              <h3 class="text-4xl font-display font-black uppercase tracking-tighter mb-2 group-hover:text-primary transition-colors leading-none">{project.title}</h3>
+              <h3 class="text-[25px] font-display font-black uppercase tracking-tighter mb-2 group-hover:text-primary transition-colors leading-none">{project.title}</h3>
               <div class="flex gap-3">
                  <span class="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em]">Archived_V1</span>
                  <span class="text-[10px] font-mono text-primary/40 uppercase tracking-[0.2em] animate-pulse">Running</span>

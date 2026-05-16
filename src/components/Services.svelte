@@ -4,11 +4,11 @@
   import SectionHeader from "./UI/SectionHeader.svelte";
   import ThreeBackground from "./ThreeBackground.svelte";
 
-  const services = [
-    { icon: Code, title: "Web App Development", desc: "Build clean, performant code with modern frameworks.", size: "md:col-span-2" },
-    { icon: Palette, title: "UI Design", desc: "Cinematic, user-centric interfaces designed in Figma.", size: "col-span-1" },
-    { icon: Zap, title: "Performance", desc: "Optimization for 60fps animations and rapid load times.", size: "col-span-1" },
-    { icon: Cpu, title: "AI Integration", desc: "Seamlessly integrate AI into your products for smarter user flows.", size: "md:col-span-2" },
+ const services = [
+    { icon: Code, title: "Web App Development", desc: "Build clean, performant code with modern frameworks.", size: "md:col-span-2", titleSize: "md:text-2xl text-md" },
+    { icon: Palette, title: "UI Design", desc: "Cinematic, user-centric interfaces designed in Figma.", size: "col-span-1", titleSize: "text-md md:text-2xl" },
+    { icon: Zap, title: "Performance", desc: "Optimization for 60fps animations and rapid load times.", size: "col-span-1", titleSize: "text-md md:text-2xl" },
+    { icon: Cpu, title: "AI Integration", desc: "Seamlessly integrate AI into your products for smarter user flows.", size: "md:col-span-2", titleSize: "text-md md:text-2xl" },
   ];
 </script>
 
@@ -36,7 +36,7 @@
           <div class="mb-8 opacity-40 group-hover:opacity-100 transition-opacity">
             <svelte:component this={s.icon} class="text-primary" size={32} />
           </div>
-          <h3 class="text-3xl font-display font-black mb-4 uppercase tracking-tighter">{s.title}</h3>
+          <h3 class={s.titleSize + " font-display font-black mb-4 uppercase tracking-tighter"}>{s.title}</h3>
           <p class="text-white/40 leading-relaxed font-light text-sm max-w-xs">{s.desc}</p>
           
           <div class="mt-8 flex items-center gap-2 group/btn cursor-pointer">

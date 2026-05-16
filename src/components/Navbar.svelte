@@ -65,7 +65,7 @@
     </div>
 
     <div class="flex items-center gap-4 md:gap-8 text-[11px] font-mono tracking-[0.2em] uppercase">
-      <div class="hidden lg:flex items-center gap-6">
+      <div class="hidden xl:flex items-center gap-6">
         <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5 text-[9px] font-mono text-white/30 mr-4 lowercase">
           <span class="text-primary">⌘+K</span> Quick_Search
         </div>
@@ -91,7 +91,7 @@
         
         <button 
           onclick={() => isOpen = !isOpen}
-          class="lg:hidden w-9 h-9 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-colors bg-white/[0.05] backdrop-blur-md rounded-sm"
+          class="xl:hidden w-9 h-9 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-colors bg-white/[0.05] backdrop-blur-md rounded-sm"
         >
           {#if isOpen}
             <X size={18} />
@@ -111,11 +111,11 @@
     tabindex="0"
     onclick={() => isOpen = false}
     onkeydown={(e) => e.key === 'Escape' && (isOpen = false)}
-    class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] lg:hidden"
+    class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] xl:hidden"
   ></div>
   <div 
     transition:fly={{ x: '100%', duration: 400, opacity: 1 }}
-    class="fixed top-0 right-0 w-[80%] max-w-sm h-full bg-background border-l border-white/10 z-[70] lg:hidden p-10 flex flex-col justify-center"
+    class="fixed top-0 right-0 w-[80%] max-w-sm h-full bg-background border-l border-white/10 z-[70] xl:hidden p-10 flex flex-col justify-center"
   >
     <div class="absolute top-10 right-10">
       <button onclick={() => isOpen = false} class="text-white/40 hover:text-primary transition-colors">

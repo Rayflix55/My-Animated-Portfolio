@@ -1,25 +1,33 @@
-<script>
-  import { onMount, setContext } from 'svelte';
+<script lang="ts">
+  import { onMount } from 'svelte';
   import Lenis from "@studio-freight/lenis";
 
   let { children } = $props();
 
   onMount(() => {
     const lenis = new Lenis({
-      lerp: 0.1,
-      wheelMultiplier: 1.2,
-      touchMultiplier: 1.5,
+      duration: 1.4,
+      lerp: 0.06,
+      wheelMultiplier: 0.8,
+      touchMultiplier: 1.0,
       smoothWheel: true,
+      syncTouch: true,
+      infinite: false,
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
     });
 
-    function raf(time) {
+    let rafId: number = 0;
+
+    function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   });
