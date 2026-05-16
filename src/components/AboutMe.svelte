@@ -105,8 +105,8 @@
         
         <div class="pt-8 transition-transform hover:scale-[1.02]">
            <img 
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=500&h=300" 
-            alt="Profile" 
+           src="/rayflix.png" 
+    alt="Akpe Samuel (Rayflix)"
             class="w-full h-64 object-cover grayscale opacity-50 hover:grayscale-0 transition-all duration-700 engineered-border"
           />
         </div>

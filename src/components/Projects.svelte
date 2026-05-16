@@ -6,10 +6,30 @@
   import ThreeBackground from "./ThreeBackground.svelte";
 
   const projects = [
-    { title: "Quantum Flux", category: "AI / Web Design", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1964", link: "#" },
-    { title: "Nova Dashboard", category: "Fintech Interface", image: "https://images.unsplash.com/photo-1551288049-bbbda536639a?auto=format&fit=crop&q=80&w=2070", link: "#" },
-    { title: "Cortex OS", category: "System Design", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072", link: "#" },
-    { title: "Luma Creative", category: "Brand Portal", image: "https://images.unsplash.com/photo-1541462608141-ad4d156ec6b4?auto=format&fit=crop&q=80&w=2070", link: "#" },
+    { 
+      title: "Weng Foundation", 
+      category: "Web3 Ecosystem", 
+      image: "/projects/1.png", 
+      link: "#" 
+    },
+    { 
+      title: "Q-Ride Portal", 
+      category: "dApp Interface", 
+      image: "/projects/2.png", 
+      link: "#" 
+    },
+    { 
+      title: "Rich Dog Protocol", 
+      category: "DeFi Dashboard", 
+      image: "/projects/3.png", 
+      link: "#" 
+    },
+    { 
+      title: "BDI Foundation", 
+      category: "UI Architecture", 
+      image: "/projects/4.png", 
+      link: "#" 
+    },
   ];
 
   let scrollY = $state(0);
@@ -21,7 +41,6 @@
 </script>
 
 <section class="py-40 md:py-60 container mx-auto px-6 lg:px-20 relative" id="portfolio">
-  <!-- Projects3D Background Placeholder -->
   <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-80">
     <div class="absolute inset-0">
       <Canvas>

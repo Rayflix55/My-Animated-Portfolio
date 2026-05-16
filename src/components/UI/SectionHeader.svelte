@@ -1,5 +1,5 @@
 <script>
-  import { cn } from "$lib/utils";
+import { cn } from "../../lib/utils";
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
 
