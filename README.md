@@ -1,6 +1,6 @@
 # Rayflix Portfolio - High-Performance Frontend Experience
 
-A polished, production-ready portfolio built with React 19, Vite, and Tailwind CSS. The site features smooth transitions, glassmorphic UI elements, and performance-optimized 3D backgrounds.
+A polished, production-ready portfolio built with Svelte and Tailwind CSS. The site features smooth transitions, glassmorphic UI elements, and performance-optimized 3D backgrounds.
 
 ## 🚀 Recent Updates & Features
 
@@ -17,8 +17,8 @@ We've implemented a series of high-end features to elevate the user experience:
 
 ## 🛠 Tech Stack
 
-- **Framework**: [React 19](https://react.dev/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Framework**: [Svelte](https://react.dev/)
+- **Build Tool**: [SvelteKit](https://vitejs.dev/)
 - **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
 - **Animations**: [Motion](https://motion.dev/)
 - **Icons**: [Lucide React](https://lucide.dev/)
