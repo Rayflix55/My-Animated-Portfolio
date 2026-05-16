@@ -5,8 +5,8 @@
   let isHovering = $state(false);
   
   const cursor = spring({ x: -100, y: -100 }, {
-    stiffness: 0.1,
-    damping: 0.25
+    stiffness: 2000,
+    damping: 30
   });
 
   onMount(() => {
