@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
   import { Cpu, Zap, Globe, Layers } from "lucide-svelte";
@@ -8,7 +8,7 @@
   import ThreeBackground from "./ThreeBackground.svelte";
 
   let scrollYProgress = $state(0);
-  let sectionRef;
+  let sectionRef = $state<HTMLElement | null>(null);
 
   onMount(() => {
     const handleScroll = () => {
@@ -18,7 +18,6 @@
       const height = rect.height;
       const windowHeight = window.innerHeight;
       
-      // Rough scrollYProgress equivalent
       let progress = 1 - (top + height) / (height + windowHeight);
       scrollYProgress = Math.max(0, Math.min(1, progress));
     };
@@ -32,7 +31,7 @@
 
   const stats = [
     { label: "Years Experience", value: "3+", sub: "Professional focus" },
-    { label: "Successful Projects", value: "50+", sub: "Delivered solutions" },
+    { label: "Successful Projects", value: "10+", sub: "Delivered solutions" },
   ];
 
   const skillStacks = [
@@ -48,7 +47,6 @@
   class="py-40 container mx-auto px-6 lg:px-20 relative" 
   id="about"
 >
-  <!-- Background Placeholder -->
   <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-70">
     <div class="absolute inset-0">
       <Canvas>
@@ -65,7 +63,7 @@
   <div class="grid lg:grid-cols-2 gap-12 items-start mt-12 perspective-2000">
     <div style:transform="translateY({leftY}px)" class="space-y-6">
       <div class="engineered-border bg-white/[0.02] p-10 relative overflow-hidden transition-all hover:scale-[1.02] active:scale-95">
-         <div class="absolute top-0 right-0 p-4 text-[10px] font-mono text-white/5 uppercase tracking-widest">Stack_Catalog</div>
+        <div class="absolute top-0 right-0 p-4 text-[10px] font-mono text-white/5 uppercase tracking-widest">Stack_Catalog</div>
         <h3 class="text-xl font-display font-bold uppercase tracking-wider mb-8">Technical Proficiency</h3>
         <div class="space-y-4">
           {#each skillStacks as stack, i}
@@ -103,14 +101,15 @@
           Based on a passion for technology and creative problem-solving, I collaborate with clients and teams to bring innovative digital ideas to life. I specialize in the modern web ecosystem, focusing on scalability and performance.
         </p>
         
-        <div class="pt-8 transition-transform hover:scale-[1.02]">
-           <img 
-           src="/rayflix.png" 
-    alt="Akpe Samuel (Rayflix)"
-            class="w-full h-64 object-cover grayscale opacity-50 hover:grayscale-0 transition-all duration-700 engineered-border"
-          />
+       <div class="pt-8 transition-transform duration-500 hover:scale-[1.1] ">
+          <div class="relative w-full max-w-[420px] mx-auto aspect-square overflow-hidden rounded-2xl engineered-border">
+            <img 
+              src="/rayflix.png" 
+              alt="Akpe Samuel (Rayflix)"
+              class="w-full h-full object-cover object-top grayscale opacity-80 hover:grayscale-0 transition-all duration-700"
+            />
+          </div>
         </div>
-      </div>
       
       <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl -z-10"></div>
     </div>

@@ -5,8 +5,6 @@
   import { Canvas } from '@threlte/core';
   import Button from "./UI/Button.svelte";
   import ThreeBackground from "./ThreeBackground.svelte";
-  // For now, I'll omit the complex WebGL background or use a placeholder
-  // HeroBackground will be ported later
   
   let scrollY = $state(0);
   
@@ -18,7 +16,7 @@
     return () => window.removeEventListener('scroll', handleScroll);
   });
   
-  // Parallax calculations
+  // Parallax calculations maintained
   let yHero = $derived(scrollY * 0.4);
   let ySub = $derived(scrollY * 0.2);
   let yTop = $derived(scrollY * 0.1);
@@ -33,7 +31,7 @@
   id="hero"
   class="relative min-h-[140vh] flex flex-col items-center justify-center pt-32 pb-40 overflow-hidden text-center"
 >
-  <!-- Placeholder for HeroBackground -->
+  <!-- Background Canvas -->
   <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent">
     <div class="absolute inset-0">
       <Canvas>
@@ -74,12 +72,25 @@
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-6">
-        <Button variant="primary" class="px-10 h-16 text-sm">
-          Hire Me <ArrowUpRight size={18} />
-        </Button>
-        <Button variant="outline" class="px-10 h-16 text-sm">
-          View Work
-        </Button>
+        <!-- Hire Me Link -->
+        <a 
+          href="mailto:rayflix55@gmail.com?subject=Job%20Opportunity%20%E2%80%94%20Let%27s%20Work%20Together&body=Hi%20Samuel%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%20have%20a%20job%20opportunity%20I%27d%20love%20to%20discuss%20with%20you.%0A%0APlease%20let%20me%20know%20your%20availability%20so%20we%20can%20connect.%0A%0ABest%20regards%2C"
+        >
+          <Button variant="primary" class="px-10 h-16 text-sm">
+            Hire Me <ArrowUpRight size={18} />
+          </Button>
+        </a>
+
+        <!-- View Work Link -->
+        <a 
+          href="https://github.com/rayflix55"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button variant="outline" class="px-10 h-16 text-sm">
+            View Work
+          </Button>
+        </a>
       </div>
       
       <div class="flex items-center gap-3 text-[10px] font-mono text-white/30 tracking-widest uppercase">
@@ -89,6 +100,7 @@
     </div>
   </div>
 
+  <!-- Decorative Elements -->
   <div
     style:transform="translate(-50%, {orbY}px) scale({orbScale})"
     class="absolute bottom-[20%] left-1/2 w-[60vw] aspect-video bg-primary/10 blur-[120px] rounded-full -z-10"

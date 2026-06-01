@@ -6,10 +6,10 @@
   import ThreeBackground from "./ThreeBackground.svelte";
 
   const experience = [
-    { year: "2024", role: "Frontend Developer", company: "CyberNexus", desc: "Building high-performance user interfaces and contributing to scalable modular frontend architectures." },
-    { year: "2023", role: "Junior Developer", company: "MetaVerse Lab", desc: "Assisting in building virtual interface components and optimizing frontend performance." },
-    { year: "2022", role: "Frontend Developer", company: "Luma Creative", desc: "Developing interactive web modules and ensuring seamless cross-platform experiences." },
-    { year: "2021", role: "Developer Intern", company: "Quantico", desc: "Assisting the core team in interface design and frontend dashboard development." },
+    { year: "2025-2026", role: "Frontend Intern", company: "HNG", desc: "Building high-performance user interfaces and contributing to scalable modular frontend architectures." },
+    { year: "2026", role: "Lead Developer", company: "Yagazie Weng Foundation", desc: "Assisting in building virtual interface components and optimizing frontend performance." },
+    { year: "2023", role: "Frontend Developer (Freelance)", company: "Self-Employed", desc: "Providing freelance frontend development services for various clients." },
+    // { year: "2021", role: "Developer Intern", company: "Quantico", desc: "Assisting the core team in interface design and frontend dashboard development." },
   ];
 
   let scrollY = $state(0);
@@ -56,7 +56,7 @@
             </div>
 
             <div class="lg:col-span-6">
-              <h3 class="text-2xl md:text-4xl font-display font-black tracking-tighter uppercase group-hover:text-white transition-colors text-white/60 mb-4">
+              <h3 class="text-2xl md:text-2xl font-display font-black tracking-tighter uppercase group-hover:text-white transition-colors text-white/60 mb-4">
                 {item.role}
               </h3>
               <p class="text-white/30 text-sm font-light leading-relaxed max-w-md group-hover:text-white/50 transition-colors">
@@ -65,7 +65,7 @@
             </div>
 
             <div class="lg:col-span-3 flex justify-end items-center gap-4">
-              <span class="text-white/20 uppercase tracking-[0.3em] font-mono text-[10px]">{item.company}</span>
+              <span class="text-white/20 uppercase tracking-[0.3em] font-mono text-[15px]">{item.company}</span>
               <div class="w-16 h-[1px] bg-white/10 group-hover:w-24 group-hover:bg-primary/40 transition-all duration-500"></div>
             </div>
           </div>
