@@ -198,7 +198,7 @@
   <!-- ── View All CTA ── -->
   <div class="flex justify-center mt-14">
     <a
-      href="/projects"
+      href="#"
       class="group flex items-center gap-3 border border-white/15 hover:border-primary/60
              px-8 py-4 text-[11px] font-mono uppercase tracking-[0.3em]
              text-white/40 hover:text-primary bg-black/20 hover:bg-primary/5
