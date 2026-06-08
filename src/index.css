@@ -38,7 +38,19 @@
   background-image: url("https://grainy-gradients.vercel.app/noise.svg");
 }
 
+/* HARDFIX FOR EDGE: Isolates canvas layout and drops redundant layer calculation passes */
+canvas,
+[class*="canvas-container"],
+.fixed.inset-0.z-\[-1\] {
+  transform: translate3d(0, 0, 0) !important;
+  will-change: transform !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
+  pointer-events: none !important; /* Stops scroll pooling stall blocks */
+}
+
 .glass {
+  will-change: backdrop-filter, background-color;
   @apply backdrop-blur-md bg-white/[0.02] border border-white/5;
 }
 
@@ -60,4 +72,40 @@
 
 .preserve-3d {
   transform-style: preserve-3d;
+}
+
+/* --- RIGOROUS LOW-END OPTIMIZATION BLOCK --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+
+  .glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: #090d16 !important;
+    box-shadow: none !important;
+  }
+
+  .perspective-2000 {
+    perspective: none !important;
+  }
+
+  .preserve-3d {
+    transform-style: flat !important;
+    transform: none !important;
+  }
+
+  .grid-background {
+    background-image: none !important;
+    background-color: var(--background) !important;
+  }
 }

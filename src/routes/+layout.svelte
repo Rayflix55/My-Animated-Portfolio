@@ -1,5 +1,6 @@
 <script>
   import "../index.css";
+  import { prefersReducedMotion } from '$lib/motion';
   let { children } = $props();
 </script>
 
