@@ -84,6 +84,8 @@
             class="w-full h-full object-cover object-top
                    grayscale opacity-25
                    group-hover:opacity-95 group-hover:grayscale-0 group-hover:scale-105
+                   group-focus-within:opacity-95 group-focus-within:grayscale-0 group-focus-within:scale-105
+                   group-active:opacity-95 group-active:grayscale-0 group-active:scale-105
                    transition-all duration-1000 ease-out"
           />
 
