@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { spring } from 'svelte/motion';
-  import { prefersReducedMotion } from '../lib/motion';
+  import { prefersReducedMotion, isCapableDevice } from '../lib/motion';
 
   let isHovering = $state(false);
   
@@ -11,7 +11,7 @@
   });
 
   onMount(() => {
-    if ($prefersReducedMotion) return;
+    if ($prefersReducedMotion || !$isCapableDevice) return;
 
     // Explicitly typed as MouseEvent
     const moveCursor = (e: MouseEvent) => {
@@ -45,10 +45,11 @@
   });
 </script>
 
-{#if !$prefersReducedMotion}
+{#if $isCapableDevice && !$prefersReducedMotion}
   <div
     class="fixed top-0 left-0 w-8 h-8 rounded-full border border-primary pointer-events-none z-[9999] transition-all mix-blend-difference"
     style:transform="translate({$cursor.x}px, {$cursor.y}px) translate(-50%, -50%) scale({isHovering ? 2.5 : 1})"
     style:background-color={isHovering ? "rgba(6, 182, 212, 0.2)" : "transparent"}
   ></div>
 {/if}
+

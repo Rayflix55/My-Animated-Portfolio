@@ -2,10 +2,8 @@
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
   import { Cpu, Zap, Globe, Layers } from "lucide-svelte";
-  import { Canvas } from '@threlte/core';
   import SectionHeader from "./UI/SectionHeader.svelte";
   import Button from "./UI/Button.svelte";
-  import ThreeBackground from "./ThreeBackground.svelte";
 
   let scrollYProgress = $state(0);
   let sectionRef = $state<HTMLElement | null>(null);
@@ -47,13 +45,7 @@
   class="py-40 container mx-auto px-6 lg:px-20 relative" 
   id="about"
 >
-  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-70">
-    <div class="absolute inset-0">
-      <Canvas>
-        <ThreeBackground type="about" />
-      </Canvas>
-    </div>
-  </div>
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-70"></div>
   
   <SectionHeader 
     subtitle="01 // Profile" 
@@ -114,4 +106,5 @@
       <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl -z-10"></div>
     </div>
   </div>
+</div>
 </section>

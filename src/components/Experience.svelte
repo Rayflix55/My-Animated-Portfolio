@@ -1,9 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
-  import { Canvas } from '@threlte/core';
   import SectionHeader from "./UI/SectionHeader.svelte";
-  import ThreeBackground from "./ThreeBackground.svelte";
 
   // Data structure updated with an explicit "current" state flag
   const experience = [
@@ -22,13 +20,7 @@
 </script>
 
 <section class="py-40 container mx-auto px-6 md:px-10 lg:px-20 relative" id="experience">
-  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-70">
-    <div class="absolute inset-0">
-      <Canvas>
-        <ThreeBackground type="experience" />
-      </Canvas>
-    </div>
-  </div>
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-70"></div>
   
   <div class="absolute left-10 lg:left-20 top-80 bottom-40 w-[1px] bg-white/5 hidden md:block">
     <div class="w-full bg-primary transition-all duration-500 h-full origin-top scale-y-0" style:transform="scaleY({Math.min(1, scrollY / 3000)})"></div>

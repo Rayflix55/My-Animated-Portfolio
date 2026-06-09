@@ -1,10 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Lenis from "@studio-freight/lenis";
+  import { prefersReducedMotion, isCapableDevice } from '../lib/motion';
 
   let { children } = $props();
 
   onMount(() => {
+    if ($prefersReducedMotion || !$isCapableDevice) return;
+
     const lenis = new Lenis({
       duration: 1.4,
       lerp: 0.06,

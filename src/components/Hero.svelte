@@ -2,9 +2,7 @@
   import { onMount } from 'svelte';
   import { fly, fade, scale } from 'svelte/transition';
   import { ArrowUpRight } from "lucide-svelte";
-  import { Canvas } from '@threlte/core';
   import Button from "./UI/Button.svelte";
-  import ThreeBackground from "./ThreeBackground.svelte";
   
   let scrollY = $state(0);
   
@@ -31,14 +29,7 @@
   id="hero"
   class="relative min-h-[140vh] flex flex-col items-center justify-center pt-32 pb-40 overflow-hidden text-center"
 >
-  <!-- Background Canvas -->
-  <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent">
-    <div class="absolute inset-0">
-      <Canvas>
-        <ThreeBackground type="hero" />
-      </Canvas>
-    </div>
-  </div>
+  <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent"></div>
   
   <div class="container mx-auto px-6 lg:px-20 z-10 relative">
     <div

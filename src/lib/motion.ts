@@ -15,14 +15,11 @@ export const isCapableDevice = writable(true);
 export function checkHardwareCapability() {
   if (typeof window === 'undefined') return;
 
-  // 1. Structural Viewport Guard (Tailwind lg breakpoint)
-  const isSmallScreen = window.innerWidth < 1024;
-
-  // 2. Hardware Archetype Matching
+  // 1. Hardware archetype matching
   const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  const hasHeavyTouch = navigator.maxTouchPoints > 1 && window.innerWidth < 1024;
+  const isTouchTablet = navigator.maxTouchPoints > 1 && window.innerWidth < 768;
 
-  if (isSmallScreen || isMobileOrTablet || hasHeavyTouch) {
+  if (isMobileOrTablet || isTouchTablet) {
     isCapableDevice.set(false);
     return;
   }

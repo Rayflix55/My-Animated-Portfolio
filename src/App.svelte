@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import SmoothScroll from "./components/SmoothScroll.svelte";
   import Navbar from "./components/Navbar.svelte";
   import CustomCursor from "./components/CustomCursor.svelte";
   import ThemeToggle from "./components/ThemeToggle.svelte";
   import CommandPalette from "./components/CommandPalette.svelte";
+  import BackgroundCanvas from "./components/BackgroundCanvas.svelte";
+  import { checkHardwareCapability, prefersReducedMotion, isCapableDevice } from "./lib/motion";
   import Hero from "./components/Hero.svelte";
   import AboutMe from "./components/AboutMe.svelte";
   import Experience from "./components/Experience.svelte";
@@ -13,6 +16,8 @@
   import Testimonials from "./components/Testimonials.svelte";
   import Contact from "./components/Contact.svelte";
   import Footer from "./components/Footer.svelte";
+
+  onMount(checkHardwareCapability);
 </script>
 
 <SmoothScroll>
@@ -21,8 +26,11 @@
   <ThemeToggle />
   
   <div class="noise-overlay"></div>
+  {#if $isCapableDevice && !$prefersReducedMotion}
+    <BackgroundCanvas />
+  {/if}
   
-  <div class="relative min-h-screen bg-background selection:bg-primary selection:text-black overflow-x-hidden">
+  <div class="relative min-h-screen selection:bg-primary selection:text-black overflow-x-hidden">
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
       <div class="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px]"></div>
       <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-accent/5 blur-[120px]"></div>

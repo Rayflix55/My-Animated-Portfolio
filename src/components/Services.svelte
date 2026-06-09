@@ -1,8 +1,6 @@
 <script>
   import { Code, Palette, Zap, Cpu } from "lucide-svelte";
-  import { Canvas } from '@threlte/core';
   import SectionHeader from "./UI/SectionHeader.svelte";
-  import ThreeBackground from "./ThreeBackground.svelte";
 
  const services = [
     { icon: Code, title: "Web App Development", desc: "Build clean, performant code with modern frameworks.", size: "md:col-span-2", titleSize: "md:text-2xl text-md" },
@@ -13,14 +11,8 @@
 </script>
 
 <section class="py-40 container mx-auto px-6 lg:px-20 relative" id="services">
-  <!-- Services3D Background Placeholder -->
-  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-90">
-    <div class="absolute inset-0">
-      <Canvas>
-        <ThreeBackground type="services" />
-      </Canvas>
-    </div>
-  </div>
+  <!-- Services background is now handled globally -->
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-90"></div>
   
   <SectionHeader 
     subtitle="04 // Capabilities" 

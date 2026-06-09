@@ -1,7 +1,5 @@
 <script lang="ts">
   import SectionHeader from "./UI/SectionHeader.svelte";
-  import { Canvas } from '@threlte/core';
-  import ThreeBackground from "./ThreeBackground.svelte";
 
   const testimonials = [
     {
@@ -42,13 +40,7 @@
 
 <section class="py-40 container mx-auto px-6 lg:px-20 overflow-hidden relative bg-transparent">
 
- <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent">
-    <div class="absolute inset-0">
-      <Canvas>
-        <ThreeBackground type="testimonials" />
-      </Canvas>
-    </div>
-  </div>
+ <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent"></div>
 
   <SectionHeader subtitle="03.5 // Feedback" title="Signal Feedback" />
 

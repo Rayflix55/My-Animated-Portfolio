@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
   import { onMount, tick } from 'svelte';
   import { fade, fly, scale } from 'svelte/transition';
   import { Command, Search, Hash, Laptop, Mail, Zap, Terminal } from "lucide-svelte";
 
   let isOpen = $state(false);
   let query = $state("");
-  let inputRef = $state();
+  let inputRef = $state<HTMLInputElement>(); // Strongly type the input element binding
 
   const commands = [
     { id: "hero", label: "Home / Core", icon: Laptop, shortcut: "H" },
@@ -20,7 +20,8 @@
   ));
 
   onMount(() => {
-    const handleKeyDown = (e) => {
+    // FIX: Typing the parameter explicitly as a KeyboardEvent
+    const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         isOpen = !isOpen;
@@ -41,12 +42,14 @@
     }
   });
 
-  const handleExecute = (id) => {
+  // FIX: Explicitly typing the section 'id' as a string
+  const handleExecute = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      // Modern scroll variable substitution
+      const offsetPosition = elementPosition + window.scrollY - offset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -92,16 +95,16 @@
         </div>
         
         <div class="space-y-1">
-                {#each filteredCommands as cmd}
-                  {@const Icon = cmd.icon}
-                  <button
-                    onclick={() => handleExecute(cmd.id)}
-                    class="w-full flex items-center justify-between p-4 rounded-xl hover:bg-primary/10 transition-all group border border-transparent hover:border-primary/20 text-left"
-                  >
-                    <div class="flex items-center gap-4">
-                      <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <Icon class="w-5 h-5 text-white/40 group-hover:text-primary transition-colors" />
-                      </div>
+          {#each filteredCommands as cmd}
+            {@const Icon = cmd.icon}
+            <button
+              onclick={() => handleExecute(cmd.id)}
+              class="w-full flex items-center justify-between p-4 rounded-xl hover:bg-primary/10 transition-all group border border-transparent hover:border-primary/20 text-left"
+            >
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <Icon class="w-5 h-5 text-white/40 group-hover:text-primary transition-colors" />
+                </div>
                 <div>
                   <div class="text-sm font-bold uppercase tracking-tight text-white/80 group-hover:text-white">
                     {cmd.label}

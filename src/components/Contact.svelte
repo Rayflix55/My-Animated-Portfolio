@@ -1,7 +1,5 @@
 <script lang="ts">
   import SectionHeader from "./UI/SectionHeader.svelte";
-  import { Canvas } from '@threlte/core';
-  import ThreeBackground from "./ThreeBackground.svelte";
 
   const socialLinks = [
     {
@@ -47,13 +45,7 @@
 
 <section class="py-40 container mx-auto px-6 lg:px-20 relative bg-transparent" id="contact">
 
- <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent">
-    <div class="absolute inset-0">
-      <Canvas>
-        <ThreeBackground type="contact" />
-      </Canvas>
-    </div>
-  </div>
+ <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent"></div>
 
   <div class="engineered-border p-8 md:p-24 bg-white/[0.01] backdrop-blur-md relative overflow-hidden">
     <div class="absolute top-0 right-0 p-6 text-[10px] font-mono text-white/5 uppercase tracking-[0.2em] select-none pointer-events-none">
