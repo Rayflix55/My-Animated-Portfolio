@@ -170,8 +170,8 @@
   </div>
 
   <div class="flex justify-center mt-14">
-    <a
-      href="#"
+    <button
+      type="button"
       class="group flex items-center gap-3 border border-white/15 hover:border-primary/60
              px-8 py-4 text-[11px] font-mono uppercase tracking-[0.3em]
              text-white/40 hover:text-primary bg-black/20 hover:bg-primary/5
@@ -179,6 +179,6 @@
     >
       <span>View All Projects</span>
       <ChevronRight size={14} class="transition-transform duration-300 group-hover:translate-x-1" />
-    </a>
+    </button>
   </div>
 </section>

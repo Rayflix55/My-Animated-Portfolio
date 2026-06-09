@@ -135,7 +135,7 @@
   // Stars
   let starsRotZ = $state(0);
   let starsRotX = $state(0);
-  let warpSmooth = 0;
+  let warpSmooth = $state(0);
 
   let pointsRef: THREE.Points       | undefined = $state();
   let streakRef: THREE.LineSegments | undefined = $state();

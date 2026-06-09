@@ -13,21 +13,22 @@
   onMount(() => {
     if ($prefersReducedMotion || !$isCapableDevice) return;
 
-    // Explicitly typed as MouseEvent
-    const moveCursor = (e: MouseEvent) => {
+    const moveCursor = (e: PointerEvent) => {
       cursor.set({ x: e.clientX, y: e.clientY });
     };
 
-    // Explicitly typed as MouseEvent
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-      
+    const updateHoverState = (target: EventTarget | null) => {
+      const element = target instanceof HTMLElement ? target : null;
+      if (!element) {
+        isHovering = false;
+        return;
+      }
+
       if (
-        target.tagName === "BUTTON" || 
-        target.tagName === "A" || 
-        target.closest("button") || 
-        target.closest("a")
+        element.tagName === "BUTTON" ||
+        element.tagName === "A" ||
+        element.closest("button") ||
+        element.closest("a")
       ) {
         isHovering = true;
       } else {
@@ -35,12 +36,22 @@
       }
     };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleMouseOver);
+    const handlePointerOver = (e: PointerEvent) => updateHoverState(e.target);
+    const handlePointerDown = (e: PointerEvent) => updateHoverState(e.target);
+    const handlePointerUp = () => {
+      isHovering = false;
+    };
+
+    window.addEventListener("pointermove", moveCursor, { passive: true });
+    window.addEventListener("pointerover", handlePointerOver, { passive: true });
+    window.addEventListener("pointerdown", handlePointerDown, { passive: true });
+    window.addEventListener("pointerup", handlePointerUp, { passive: true });
 
     return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("pointermove", moveCursor);
+      window.removeEventListener("pointerover", handlePointerOver);
+      window.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("pointerup", handlePointerUp);
     };
   });
 </script>

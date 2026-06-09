@@ -17,9 +17,14 @@ export function checkHardwareCapability() {
 
   // 1. Hardware archetype matching
   const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  const isTouchTablet = navigator.maxTouchPoints > 1 && window.innerWidth < 768;
+  const isTouchDevice = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
+  const prefersCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  const prefersNoHover = window.matchMedia('(hover: none)').matches;
 
-  if (isMobileOrTablet || isTouchTablet) {
+  if (
+    isMobileOrTablet ||
+    (isTouchDevice && (prefersCoarsePointer || prefersNoHover))
+  ) {
     isCapableDevice.set(false);
     return;
   }
