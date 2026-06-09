@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { fade, fly, slide } from 'svelte/transition';
   import { spring } from 'svelte/motion';
@@ -25,21 +25,23 @@
     { name: "Contact", id: "contact" },
   ];
 
-  const handleNavClick = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+  // Explicitly added MouseEvent type for 'e' and string type for 'id'
+// Allow either MouseEvent or KeyboardEvent to pass through cleanly
+const handleNavClick = (e: MouseEvent | KeyboardEvent, id: string) => {
+  e.preventDefault();
+  const element = document.getElementById(id);
+  if (element) {
+    const offset = 80;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.scrollY - offset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
-    isOpen = false;
-  };
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  }
+  isOpen = false;
+};
 </script>
 
 <nav 

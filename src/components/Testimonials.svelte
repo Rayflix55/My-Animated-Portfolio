@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Canvas } from "@threlte/core";
   import SectionHeader from "./UI/SectionHeader.svelte";
+  import { Canvas } from '@threlte/core';
   import ThreeBackground from "./ThreeBackground.svelte";
 
   const testimonials = [
@@ -40,10 +40,9 @@
   ];
 </script>
 
-<section class="py-40 container mx-auto px-6 lg:px-20 overflow-hidden relative">
-  <div
-    class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-70"
-  >
+<section class="py-40 container mx-auto px-6 lg:px-20 overflow-hidden relative bg-transparent">
+
+ <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent">
     <div class="absolute inset-0">
       <Canvas>
         <ThreeBackground type="testimonials" />
@@ -55,11 +54,11 @@
 
   <div
     class="flex flex-nowrap gap-4 overflow-x-auto pb-6 snap-x snap-mandatory mt-20
-              [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+           [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
   >
     {#each testimonials as t, i}
       <div
-        class="group flex-shrink-0 w-[88vw] md:w-[520px] engineered-border bg-white/[0.02]
+        class="group flex-shrink-0 w-[88vw] md:w-[520px] engineered-border bg-white/[0.02] backdrop-blur-md
                snap-center relative hover:bg-white/[0.04] transition-all duration-500
                hover:scale-[1.015] active:scale-[0.99] text-left flex flex-col"
       >
@@ -90,12 +89,12 @@
             "{t.text}"
           </blockquote>
 
-          <div class="border-t border-white/8"></div>
+          <div class="border-t border-white/5"></div>
 
           <div class="flex items-center gap-5">
             <div
               class="w-12 h-12 flex items-center justify-center text-[11px] font-mono font-bold
-                     border shrink-0 transition-colors duration-300"
+                     border shrink-0 transition-colors duration-300 select-none"
               style="border-color: {t.accent}22; color: {t.accent}; background-color: {t.accent}0d;"
             >
               {t.avatar}
@@ -116,7 +115,7 @@
 
             <div
               class="shrink-0 border px-3 py-1.5 text-[8px] font-mono uppercase tracking-[0.2em]
-                     transition-all duration-300 group-hover:opacity-80"
+                     transition-all duration-300 group-hover:opacity-80 select-none"
               style="border-color: {t.accent}33; color: {t.accent}99;"
             >
               {t.companyShort}

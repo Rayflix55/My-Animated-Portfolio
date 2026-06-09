@@ -1,5 +1,6 @@
-<script>
-  import { onMount } from 'svelte';
+<script lang="ts">
+  import { onMount, setContext } from 'svelte';
+  import { writable } from 'svelte/store';
   import Navbar from "../components/Navbar.svelte";
   import Hero from "../components/Hero.svelte";
   import AboutMe from "../components/AboutMe.svelte";
@@ -14,28 +15,22 @@
   import CustomCursor from "../components/CustomCursor.svelte";
   import SmoothScroll from "../components/SmoothScroll.svelte";
   import CommandPalette from "../components/CommandPalette.svelte";
-
+  
+  const lenisStore = writable(null);
+  setContext('lenis', lenisStore);
+  
   let mounted = $state(false);
-  onMount(() => {
-    mounted = true;
-  });
+  onMount(() => { mounted = true; });
 </script>
 
-<svelte:head>
-  <title>Rayflix | Creative Frontend Developer Portfolio</title>
-  <meta name="description" content="Portfolio of Akpe Samuel (Rayflix), a Junior Frontend Developer specializing in high-end web experiences." />
-</svelte:head>
-
-<div class="relative min-h-screen bg-background text-white selection:bg-primary selection:text-black font-sans overflow-x-hidden">
-  <!-- Scanline / Grid Overlay -->
-  <div class="fixed inset-0 grid-background opacity-20 -z-10 pointer-events-none"></div>
-  
+<div class="relative w-full bg-transparent text-white font-sans">
   {#if mounted}
     <CustomCursor />
     <CommandPalette />
+    
     <SmoothScroll>
       <Navbar />
-      <main class="preserve-3d perspective-2000">
+      <main class="relative z-10 w-full bg-transparent">
         <Hero />
         <AboutMe />
         <Projects />
@@ -48,43 +43,5 @@
       <Footer />
     </SmoothScroll>
   {:else}
-    <!-- SSR Fallback -->
-    <Navbar />
-    <main>
-      <Hero />
-      <AboutMe />
-      <Projects />
-      <Experience />
-      <Services />
-      <WorkProcess />
-      <Testimonials />
-      <Contact />
-    </main>
-    <Footer />
-  {/if}
-  
-  <div class="fixed bottom-10 right-10 z-[100]">
-    <ThemeToggle />
-  </div>
+    {/if}
 </div>
-
-<style>
-  :global(body) {
-    background-color: #020617; /* bg-background */
-    cursor: none; /* Crucial for CustomCursor to shine */
-  }
-
-  @media (max-width: 1024px) {
-    :global(body) {
-      cursor: auto;
-    }
-  }
-
-  .perspective-2000 {
-    perspective: 2000px;
-  }
-
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
-</style>

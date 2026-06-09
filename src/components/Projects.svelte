@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { ArrowUpRight, Globe, ChevronRight } from "lucide-svelte";
-  import { Canvas } from '@threlte/core';
   import SectionHeader from "./UI/SectionHeader.svelte";
+  import { Canvas } from '@threlte/core';
   import ThreeBackground from "./ThreeBackground.svelte";
 
   const projects = [
@@ -13,7 +13,7 @@
       image: "/projects/1.png", 
       liveLink: "https://yagaziewengfoundationforthedeaf.org/",
       githubLink: "https://github.com/Rayflix55/Yagazie-Weng-Umezurike-Foundation-",
-      tech: ["Vanila JS", "TailwindCSS", "HTML5"],
+      tech: ["Vanilla JS", "TailwindCSS", "HTML5"],
       status: "Live",
       year: "2026",
     },
@@ -24,7 +24,7 @@
       image: "/projects/4.png", 
       liveLink: "https://jupiter-real-time-analytics-dashboa.vercel.app/",
       githubLink: "https://github.com/Rayflix55/Jupiter-Real-Time-Analytics-Dashboard",
-      tech: ["Vue 3", "Typescript", "Pinia", "ECharts"],
+      tech: ["Vue 3", "TypeScript", "Pinia", "ECharts"],
       status: "Live",
       year: "2026",
     },
@@ -35,7 +35,7 @@
       image: "/projects/3.png", 
       liveLink: "https://house-of-enna.vercel.app/",
       githubLink: "https://github.com/Rayflix55/House-Of-Enna",
-      tech: ["React 19", "Typescript", "Framer-Motion", "Tailwind CSS"],
+      tech: ["React 19", "TypeScript", "Framer-Motion", "Tailwind CSS"],
       status: "Live",
       year: "2026",
     },
@@ -46,13 +46,12 @@
       image: "/projects/2.png", 
       liveLink: "https://techbdi.com.ng/",
       githubLink: "https://github.com/Chamberezigbo/Abaglobal",
-      tech: ["HTML", "CSS", "SCSS", "Javascript","PHP"],
+      tech: ["HTML", "CSS", "SCSS", "JavaScript","PHP"],
       status: "Live",
       year: "2025",
     },
   ];
 
-  // Only 4 featured on homepage
   const featured = projects.slice(0, 4);
 
   let scrollY = $state(0);
@@ -69,10 +68,9 @@
   }
 </script>
 
-<section class="py-40 md:py-60 container mx-auto px-6 lg:px-20 relative" id="portfolio">
+<section class="py-40 md:py-60 container mx-auto px-6 lg:px-20 relative bg-transparent" id="portfolio">
 
-  <!-- Three.js background -->
-  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-80">
+ <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent">
     <div class="absolute inset-0">
       <Canvas>
         <ThreeBackground type="projects" />
@@ -82,13 +80,11 @@
 
   <SectionHeader subtitle="02 // Showcase" title="Featured Work" />
 
-  <!-- 2-column grid of project cards -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-20">
     {#each featured as project}
-      <div class="group engineered-border bg-black/60 backdrop-blur-sm overflow-hidden
+      <div class="group engineered-border bg-slate-950/40 backdrop-blur-md overflow-hidden
                   transition-all duration-500 hover:scale-[1.015] active:scale-[0.99]">
 
-        <!-- ── LANDSCAPE image (16:9, full width) ── -->
         <div class="relative w-full aspect-video overflow-hidden">
           <img
             src={project.image}
@@ -99,36 +95,28 @@
                    transition-all duration-1000 ease-out"
           />
 
-          <!-- Fade bottom of image into the card panel -->
           <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 pointer-events-none"></div>
 
-          <!-- Status badge top-right -->
           <span class="absolute top-3 right-3 text-[9px] font-mono uppercase tracking-[0.2em]
                        px-2.5 py-1 border rounded-full backdrop-blur-sm {statusColor(project.status)}">
             {project.status}
           </span>
 
-          <!-- Corner accents -->
           <div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/15 group-hover:border-primary/60 transition-colors"></div>
           <div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/15 group-hover:border-primary/60 transition-colors"></div>
         </div>
 
-        <!-- ── INFO stacked below image ── -->
         <div class="flex flex-col gap-4 p-6">
-
-          <!-- Index + category -->
           <span class="text-[10px] font-mono text-white/20 tracking-[0.25em] uppercase">
             {project.index} // {project.category}
           </span>
 
-          <!-- Title -->
           <h3 class="text-[24px] md:text-[28px] font-display font-black uppercase tracking-tighter leading-none
                      group-hover:text-primary transition-colors duration-300">
             {project.title}
           </h3>
 
-          <!-- Tech stack pills -->
-          <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-2">
             {#each project.tech as t}
               <span class="text-[9px] font-mono uppercase tracking-[0.15em] px-2.5 py-1
                            border border-white/10 text-white/40
@@ -136,16 +124,12 @@
                            transition-all duration-300">
                 {t}
               </span>
-            {/each}
-          </div>
+            {/each} </div>
 
-          <!-- Divider row: year + action buttons -->
           <div class="border-t border-white/8 pt-4 flex items-center justify-between">
             <span class="text-[10px] font-mono text-white/20 tracking-widest">{project.year}</span>
 
             <div class="flex items-center gap-2">
-
-              <!-- GitHub -->
               <a
                 href={project.githubLink}
                 target="_blank"
@@ -160,7 +144,6 @@
                 <span>Source</span>
               </a>
 
-              <!-- Live -->
               <a
                 href={project.liveLink}
                 target="_blank"
@@ -174,7 +157,6 @@
                 <span>Live</span>
               </a>
 
-              <!-- Arrow -->
               <a
                 href={project.liveLink}
                 target="_blank"
@@ -195,7 +177,6 @@
     {/each}
   </div>
 
-  <!-- ── View All CTA ── -->
   <div class="flex justify-center mt-14">
     <a
       href="#"
@@ -208,5 +189,4 @@
       <ChevronRight size={14} class="transition-transform duration-300 group-hover:translate-x-1" />
     </a>
   </div>
-
 </section>

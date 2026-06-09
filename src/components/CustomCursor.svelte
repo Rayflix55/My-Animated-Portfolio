@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { spring } from 'svelte/motion';
   import { prefersReducedMotion } from '../lib/motion';
@@ -6,19 +6,21 @@
   let isHovering = $state(false);
   
   const cursor = spring({ x: -100, y: -100 }, {
-    stiffness: 2000,
-    damping: 30
+    stiffness: 0.15,
+    damping: 0.1
   });
 
   onMount(() => {
     if ($prefersReducedMotion) return;
 
-    const moveCursor = (e) => {
+    // Explicitly typed as MouseEvent
+    const moveCursor = (e: MouseEvent) => {
       cursor.set({ x: e.clientX, y: e.clientY });
     };
 
-    const handleMouseOver = (e) => {
-      const target = e.target;
+    // Explicitly typed as MouseEvent
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
       if (!target) return;
       
       if (

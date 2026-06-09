@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { Canvas } from '@threlte/core';
-  import Button from "./UI/Button.svelte";
   import SectionHeader from "./UI/SectionHeader.svelte";
+  import { Canvas } from '@threlte/core';
   import ThreeBackground from "./ThreeBackground.svelte";
 
   const socialLinks = [
@@ -15,7 +14,7 @@
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/akpe-samuel-993971329",
       handle: "Akpe Samuel",
-      svg: `<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
+      svg: `<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 1 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
     },
     {
       label: "Email",
@@ -31,7 +30,6 @@
     },
   ];
 
-  // Form state
   let name = $state('');
   let email = $state('');
   let subject = $state('');
@@ -47,9 +45,9 @@
   }
 </script>
 
-<section class="py-40 container mx-auto px-6 lg:px-20 relative" id="contact">
+<section class="py-40 container mx-auto px-6 lg:px-20 relative bg-transparent" id="contact">
 
-  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden opacity-80">
+ <div class="absolute inset-0 -z-30 pointer-events-none opacity-80 bg-gradient-to-b from-primary/5 to-transparent">
     <div class="absolute inset-0">
       <Canvas>
         <ThreeBackground type="contact" />
@@ -57,15 +55,14 @@
     </div>
   </div>
 
-  <div class="engineered-border p-8 md:p-24 bg-white/[0.01] relative overflow-hidden">
-    <div class="absolute top-0 right-0 p-6 text-[10px] font-mono text-white/5 uppercase tracking-[0.2em]">
+  <div class="engineered-border p-8 md:p-24 bg-white/[0.01] backdrop-blur-md relative overflow-hidden">
+    <div class="absolute top-0 right-0 p-6 text-[10px] font-mono text-white/5 uppercase tracking-[0.2em] select-none pointer-events-none">
       Contact_Channel_Open
     </div>
 
     <div class="grid md:grid-cols-2 gap-20 relative z-10">
 
-      <!-- LEFT: info + socials -->
-      <div class="flex flex-col justify-between gap-12">
+      <div class="flex flex-col justify-between gap-12 text-left">
         <div>
           <SectionHeader subtitle="04 // Terminal" title="Get In Touch" />
           <p class="text-white/40 text-xl font-light mt-8 max-w-sm leading-relaxed">
@@ -79,11 +76,10 @@
               href={link.href}
               target={link.label === 'Email' ? '_self' : '_blank'}
               rel="noopener noreferrer"
-              class="group flex items-center gap-4 border border-white/5 bg-white/[0.02]
+              class="group flex items-center gap-4 border border-white/5 bg-white/[0.02] backdrop-blur-sm
                      px-5 py-4 hover:border-primary/40 hover:bg-white/[0.04]
                      transition-all duration-300 hover:-translate-x-1"
             >
-              <!-- SVG icon -->
               <span class="text-white/20 group-hover:text-primary transition-colors duration-300 shrink-0">
                 {@html link.svg}
               </span>
@@ -97,7 +93,6 @@
                 </span>
               </div>
 
-              <!-- Arrow -->
               <span class="ml-auto text-white/10 group-hover:text-primary transition-colors shrink-0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
                   <path d="M7 17L17 7M17 7H7M17 7v10"/>
@@ -108,9 +103,7 @@
         </div>
       </div>
 
-      <!-- RIGHT: form → mailto on submit -->
       <form onsubmit={handleSend} class="space-y-5 flex flex-col">
-
         <input
           type="text"
           bind:value={name}
@@ -162,12 +155,12 @@
           <span>Send Message</span>
         </button>
 
-        <p class="text-[10px] font-mono text-white/15 text-center uppercase tracking-widest">
+        <p class="text-[10px] font-mono text-white/15 text-center uppercase tracking-widest select-none">
           Opens your default email app
         </p>
       </form>
     </div>
 
-    <div class="absolute -bottom-1 -right-1 w-8 h-8 border-b border-r border-primary"></div>
+    <div class="absolute -bottom-1 -right-1 w-8 h-8 border-b border-r border-primary select-none pointer-events-none"></div>
   </div>
 </section>
