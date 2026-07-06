@@ -16,20 +16,24 @@
   import Testimonials from "./components/Testimonials.svelte";
   import Contact from "./components/Contact.svelte";
   import Footer from "./components/Footer.svelte";
+  import ProjectsPage from "./pages/ProjectsPage.svelte";
+  import { route, initRouter } from "./lib/router";
 
-  onMount(checkHardwareCapability);
+  onMount(() => {
+    checkHardwareCapability();
+    initRouter();
+  });
 </script>
 
 <SmoothScroll>
   <CustomCursor />
   <CommandPalette />
   <ThemeToggle />
-  
   <div class="noise-overlay"></div>
   {#if $isCapableDevice && !$prefersReducedMotion}
     <BackgroundCanvas />
   {/if}
-  
+
   <div class="relative min-h-screen selection:bg-primary selection:text-black overflow-x-hidden">
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
       <div class="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px]"></div>
@@ -38,7 +42,7 @@
     </div>
 
     <Navbar />
-    
+
     <div class="fixed top-1/2 -right-4 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center gap-8 py-8 px-4 border-l border-white/10 bg-black/40 backdrop-blur-md">
       <div class="rotate-90 text-[10px] font-mono tracking-[0.3em] text-white/20 whitespace-nowrap mb-12 uppercase">Social_Protocol</div>
       <div class="w-[1px] h-20 bg-white/10"></div>
@@ -50,16 +54,20 @@
     </div>
 
     <main class="preserve-3d perspective-2000">
-      <Hero />
-      <AboutMe />
-      <Experience />
-      <Services />
-      <WorkProcess />
-      <Projects />
-      <Testimonials />
-      <Contact />
+      {#if $route === 'projects'}
+        <ProjectsPage />
+      {:else}
+        <Hero />
+        <AboutMe />
+        <Experience />
+        <Services />
+        <WorkProcess />
+        <Projects />
+        <Testimonials />
+        <Contact />
+      {/if}
     </main>
-    
+
     <Footer />
   </div>
 </SmoothScroll>

@@ -36,6 +36,31 @@
       accent: "#e879f9",
     },
   ];
+
+  const loopTestimonials = [...testimonials, ...testimonials];
+
+  function createTiltData(length: number) {
+    return Array.from({ length }, () => ({ x: 0, y: 0 }));
+  }
+
+  let cardTilt = createTiltData(loopTestimonials.length);
+
+  function handleTilt(e: MouseEvent, index: number) {
+    const card = e.currentTarget as HTMLElement;
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 16;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -10;
+
+    cardTilt = cardTilt.map((t, i) =>
+      i === index
+        ? { x: Math.max(Math.min(x, 10), -10), y: Math.max(Math.min(y, 10), -10) }
+        : t
+    );
+  }
+
+  function resetTilt(index: number) {
+    cardTilt = cardTilt.map((t, i) => (i === index ? { x: 0, y: 0 } : t));
+  }
 </script>
 
 <section class="py-40 container mx-auto px-6 lg:px-20 overflow-hidden relative bg-transparent">
@@ -44,83 +69,90 @@
 
   <SectionHeader subtitle="03.5 // Feedback" title="Signal Feedback" />
 
-  <div
-    class="flex flex-nowrap gap-4 overflow-x-auto pb-6 snap-x snap-mandatory mt-20
-           [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-  >
-    {#each testimonials as t, i}
-      <div
-        class="group flex-shrink-0 w-[88vw] md:w-[520px] engineered-border bg-white/[0.02] backdrop-blur-md
-               snap-center relative hover:bg-white/[0.04] transition-all duration-500
-               hover:scale-[1.015] active:scale-[0.99] text-left flex flex-col"
-      >
-        <div class="flex items-center justify-between px-8 pt-6 pb-0">
-          <span
-            class="text-[9px] font-mono uppercase tracking-[0.25em] text-white/20"
-          >
-            {t.project}
-          </span>
-          <span class="text-[9px] font-mono text-white/10 tracking-widest">
-            Feed_Source_{i + 1}
-          </span>
-        </div>
-
-        <div class="flex flex-col flex-1 p-8 gap-7">
-          <div class="flex gap-1.5">
-            {#each Array(t.rating) as _}
-              <div
-                class="w-1.5 h-1.5 rounded-full"
-                style="background-color: {t.accent}"
-              ></div>
-            {/each}
-          </div>
-
-          <blockquote
-            class="text-[17px] font-light text-white/60 leading-relaxed flex-1"
-          >
-            "{t.text}"
-          </blockquote>
-
-          <div class="border-t border-white/5"></div>
-
-          <div class="flex items-center gap-5">
-            <div
-              class="w-12 h-12 flex items-center justify-center text-[11px] font-mono font-bold
-                     border shrink-0 transition-colors duration-300 select-none"
-              style="border-color: {t.accent}22; color: {t.accent}; background-color: {t.accent}0d;"
-            >
-              {t.avatar}
-            </div>
-
-            <div class="flex flex-col gap-1 flex-1 min-w-0">
-              <h4
-                class="font-display font-black uppercase tracking-wider text-sm text-white leading-none"
-              >
-                {t.name}
-              </h4>
-              <p
-                class="text-white/40 text-[10px] font-mono uppercase tracking-[0.18em] truncate"
-              >
-                {t.role}
-              </p>
-            </div>
-
-            <div
-              class="shrink-0 border px-3 py-1.5 text-[8px] font-mono uppercase tracking-[0.2em]
-                     transition-all duration-300 group-hover:opacity-80 select-none"
-              style="border-color: {t.accent}33; color: {t.accent}99;"
-            >
-              {t.companyShort}
-            </div>
-          </div>
-        </div>
-
+  <div class="relative overflow-hidden mt-20">
+    <div
+      class="flex animate-feedback-marquee gap-4 pb-6 snap-x snap-mandatory
+             [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+    >
+      {#each loopTestimonials as t, i}
         <div
-          class="absolute -bottom-px -right-px w-4 h-4 border-b border-r border-white/10
-                 group-hover:border-primary transition-colors duration-300"
-        ></div>
-      </div>
-    {/each}
+          on:mousemove={(e) => handleTilt(e, i)}
+          on:mouseleave={() => resetTilt(i)}
+          role="button"
+          tabindex="0"
+          class="group flex-shrink-0 w-[88vw] md:w-[520px] engineered-border bg-white/[0.02] backdrop-blur-md
+                 snap-center relative hover:bg-white/[0.04] transition-all duration-500
+                 hover:scale-[1.015] active:scale-[0.99] text-left flex flex-col"
+          style="transform: perspective(1000px) rotateX({cardTilt[i]?.y || 0}deg) rotateY({cardTilt[i]?.x || 0}deg);"
+        >
+          <div class="flex items-center justify-between px-8 pt-6 pb-0">
+            <span
+              class="text-[9px] font-mono uppercase tracking-[0.25em] text-white/20"
+            >
+              {t.project}
+            </span>
+            <span class="text-[9px] font-mono text-white/10 tracking-widest">
+              Feed_Source_{i + 1}
+            </span>
+          </div>
+
+          <div class="flex flex-col flex-1 p-8 gap-7">
+            <div class="flex gap-1.5">
+              {#each Array(t.rating) as _}
+                <div
+                  class="w-1.5 h-1.5 rounded-full"
+                  style="background-color: {t.accent}"
+                ></div>
+              {/each}
+            </div>
+
+            <blockquote
+              class="text-[17px] font-light text-white/60 leading-relaxed flex-1"
+            >
+              "{t.text}"
+            </blockquote>
+
+            <div class="border-t border-white/5"></div>
+
+            <div class="flex items-center gap-5">
+              <div
+                class="w-12 h-12 flex items-center justify-center text-[11px] font-mono font-bold
+                       border shrink-0 transition-colors duration-300 select-none"
+                style="border-color: {t.accent}22; color: {t.accent}; background-color: {t.accent}0d;"
+              >
+                {t.avatar}
+              </div>
+
+              <div class="flex flex-col gap-1 flex-1 min-w-0">
+                <h4
+                  class="font-display font-black uppercase tracking-wider text-sm text-white leading-none"
+                >
+                  {t.name}
+                </h4>
+                <p
+                  class="text-white/40 text-[10px] font-mono uppercase tracking-[0.18em] truncate"
+                >
+                  {t.role}
+                </p>
+              </div>
+
+              <div
+                class="shrink-0 border px-3 py-1.5 text-[8px] font-mono uppercase tracking-[0.2em]
+                       transition-all duration-300 group-hover:opacity-80 select-none"
+                style="border-color: {t.accent}33; color: {t.accent}99;"
+              >
+                {t.companyShort}
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute -bottom-px -right-px w-4 h-4 border-b border-r border-white/10
+                   group-hover:border-primary transition-colors duration-300"
+          ></div>
+        </div>
+      {/each}
+    </div>
   </div>
 
   <div class="flex items-center gap-3 mt-6 justify-center md:justify-start">
@@ -135,3 +167,29 @@
     >
   </div>
 </section>
+
+<style>
+  .animate-feedback-marquee {
+    animation: feedback-marquee 18s linear infinite;
+    display: inline-flex;
+  }
+
+  .animate-feedback-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  .animate-feedback-marquee > div {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.18s ease-out;
+  }
+
+  @keyframes feedback-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>

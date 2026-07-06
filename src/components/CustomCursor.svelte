@@ -1,13 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { spring } from 'svelte/motion';
+  import { tweened } from 'svelte/motion';
+  import { cubicOut } from 'svelte/easing';
   import { prefersReducedMotion, isCapableDevice } from '../lib/motion';
 
   let isHovering = $state(false);
   
-  const cursor = spring({ x: -100, y: -100 }, {
-    stiffness: 0.15,
-    damping: 0.1
+  const cursor = tweened({ x: -100, y: -100 }, {
+    duration: 120,
+    easing: cubicOut
   });
 
   onMount(() => {

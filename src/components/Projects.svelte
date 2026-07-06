@@ -2,53 +2,8 @@
   import { onMount } from 'svelte';
   import { ArrowUpRight, Globe, ChevronRight } from "lucide-svelte";
   import SectionHeader from "./UI/SectionHeader.svelte";
-
-  const projects = [
-    { 
-      title: "Weng Foundation", 
-      category: "Disability Support Platform",
-      index: "01",
-      image: "/projects/1.png", 
-      liveLink: "https://yagaziewengfoundationforthedeaf.org/",
-      githubLink: "https://github.com/Rayflix55/Yagazie-Weng-Umezurike-Foundation-",
-      tech: ["Vanilla JS", "TailwindCSS", "HTML5"],
-      status: "Live",
-      year: "2026",
-    },
-    { 
-      title: "Jupiter", 
-      category: "Analytics Dashboard",
-      index: "02",
-      image: "/projects/4.png", 
-      liveLink: "https://jupiter-real-time-analytics-dashboa.vercel.app/",
-      githubLink: "https://github.com/Rayflix55/Jupiter-Real-Time-Analytics-Dashboard",
-      tech: ["Vue 3", "TypeScript", "Pinia", "ECharts"],
-      status: "Live",
-      year: "2026",
-    },
-    { 
-      title: "House of Enna", 
-      category: "Female Clothing Brand",
-      index: "03",
-      image: "/projects/3.png", 
-      liveLink: "https://house-of-enna.vercel.app/",
-      githubLink: "https://github.com/Rayflix55/House-Of-Enna",
-      tech: ["React 19", "TypeScript", "Framer-Motion", "Tailwind CSS"],
-      status: "Live",
-      year: "2026",
-    },
-    { 
-      title: "BDI Foundation", 
-      category: "Nonprofit Website",
-      index: "04",
-      image: "/projects/2.png", 
-      liveLink: "https://techbdi.com.ng/",
-      githubLink: "https://github.com/Chamberezigbo/Abaglobal",
-      tech: ["HTML", "CSS", "SCSS", "JavaScript","PHP"],
-      status: "Live",
-      year: "2025",
-    },
-  ];
+  import { projects } from "../lib/data/projects";
+  import { navigate } from "../lib/router";
 
   const featured = projects.slice(0, 4);
 
@@ -72,7 +27,7 @@
 
   <SectionHeader subtitle="02 // Showcase" title="Featured Work" />
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-20">
     {#each featured as project}
       <div class="group engineered-border bg-slate-950/40 backdrop-blur-md overflow-hidden
                   transition-all duration-500 hover:scale-[1.015] active:scale-[0.99]">
@@ -172,8 +127,9 @@
   </div>
 
   <div class="flex justify-center mt-14">
-    <button
-      type="button"
+    <a
+      href="/projects"
+      onclick={(e) => { e.preventDefault(); navigate('/projects'); }}
       class="group flex items-center gap-3 border border-white/15 hover:border-primary/60
              px-8 py-4 text-[11px] font-mono uppercase tracking-[0.3em]
              text-white/40 hover:text-primary bg-black/20 hover:bg-primary/5
@@ -181,6 +137,6 @@
     >
       <span>View All Projects</span>
       <ChevronRight size={14} class="transition-transform duration-300 group-hover:translate-x-1" />
-    </button>
+    </a>
   </div>
 </section>
