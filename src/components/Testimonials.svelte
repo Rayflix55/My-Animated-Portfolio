@@ -1,5 +1,8 @@
 <script lang="ts">
   import SectionHeader from "./UI/SectionHeader.svelte";
+  import { prefersReducedMotion, isCapableDevice } from '../lib/motion';
+
+  $: canAnimateFeedback = $isCapableDevice && !$prefersReducedMotion;
 
   const testimonials = [
     {
@@ -71,19 +74,20 @@
 
   <div class="relative overflow-hidden mt-20">
     <div
-      class="flex animate-feedback-marquee gap-4 pb-6 snap-x snap-mandatory
+      class="flex gap-4 pb-6 snap-x snap-mandatory
              [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      class:animate-feedback-marquee={canAnimateFeedback}
     >
       {#each loopTestimonials as t, i}
         <div
-          on:mousemove={(e) => handleTilt(e, i)}
-          on:mouseleave={() => resetTilt(i)}
+          on:mousemove={canAnimateFeedback ? (e) => handleTilt(e, i) : undefined}
+          on:mouseleave={canAnimateFeedback ? () => resetTilt(i) : undefined}
           role="button"
           tabindex="0"
           class="group flex-shrink-0 w-[88vw] md:w-[520px] engineered-border bg-white/[0.02] backdrop-blur-md
                  snap-center relative hover:bg-white/[0.04] transition-all duration-500
                  hover:scale-[1.015] active:scale-[0.99] text-left flex flex-col"
-          style="transform: perspective(1000px) rotateX({cardTilt[i]?.y || 0}deg) rotateY({cardTilt[i]?.x || 0}deg);"
+          style="transform: perspective(1000px) rotateX({canAnimateFeedback ? cardTilt[i]?.y || 0 : 0}deg) rotateY({canAnimateFeedback ? cardTilt[i]?.x || 0 : 0}deg);"
         >
           <div class="flex items-center justify-between px-8 pt-6 pb-0">
             <span

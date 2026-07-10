@@ -1,4 +1,4 @@
-import { writable, readable } from 'svelte/store';
+import { derived, readable, writable } from 'svelte/store';
 
 export const prefersReducedMotion = readable(false, (set) => {
   if (typeof window === 'undefined') return;
@@ -12,6 +12,11 @@ export const prefersReducedMotion = readable(false, (set) => {
 
 export const isCapableDevice = writable(true);
 
+export const canUseMotion = derived(
+  [prefersReducedMotion, isCapableDevice],
+  ([$prefersReducedMotion, $isCapableDevice]) => $isCapableDevice && !$prefersReducedMotion
+);
+
 export function checkHardwareCapability() {
   if (typeof window === 'undefined') return;
 
@@ -20,10 +25,16 @@ export function checkHardwareCapability() {
   const isTouchDevice = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
   const prefersCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
   const prefersNoHover = window.matchMedia('(hover: none)').matches;
+  const deviceMemory = (navigator as any).deviceMemory || 8;
+  const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+  const isLowEndMemory = deviceMemory > 0 && deviceMemory < 4;
+  const isLowEndCpu = hardwareConcurrency > 0 && hardwareConcurrency <= 2;
 
   if (
     isMobileOrTablet ||
-    (isTouchDevice && (prefersCoarsePointer || prefersNoHover))
+    (isTouchDevice && (prefersCoarsePointer || prefersNoHover)) ||
+    isLowEndMemory ||
+    isLowEndCpu
   ) {
     isCapableDevice.set(false);
     return;

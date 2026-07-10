@@ -87,7 +87,7 @@ const handleNavClick = (e: MouseEvent | KeyboardEvent, id: string) => {
             <a 
               href="#{link.id}"
               onclick={(e) => handleNavClick(e, link.id)}
-              class="hover:text-primary transition-colors text-white/50 hover:text-white"
+              class="hover:text-primary transition-colors text-white/50"
             >
               <span class="text-primary/40 mr-1">0{i+1}_</span>{link.name}
             </a>

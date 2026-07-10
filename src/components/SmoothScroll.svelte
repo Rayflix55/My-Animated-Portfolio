@@ -1,39 +1,47 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Lenis from "@studio-freight/lenis";
   import { prefersReducedMotion, isCapableDevice } from '../lib/motion';
 
-  let { children } = $props();
+  let lenis: any;
+  let rafId = 0;
+  let active = true;
 
   onMount(() => {
     if ($prefersReducedMotion || !$isCapableDevice) return;
 
-    const lenis = new Lenis({
-      duration: 1.4,
-      lerp: 0.06,
-      wheelMultiplier: 0.8,
-      touchMultiplier: 1.0,
-      smoothWheel: true,
-      syncTouch: true,
-      infinite: false,
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-    });
+    const initSmoothScroll = async () => {
+      const module = await import('@studio-freight/lenis');
+      if (!active || $prefersReducedMotion || !$isCapableDevice) return;
 
-    let rafId: number = 0;
+      const Lenis = module.default;
+      lenis = new Lenis({
+        duration: 1.4,
+        lerp: 0.06,
+        wheelMultiplier: 0.8,
+        touchMultiplier: 1.0,
+        smoothWheel: true,
+        syncTouch: true,
+        infinite: false,
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+      });
 
-    function raf(time: number) {
-      lenis.raf(time);
+      const raf = (time: number) => {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      };
+
       rafId = requestAnimationFrame(raf);
-    }
+    };
 
-    rafId = requestAnimationFrame(raf);
+    initSmoothScroll();
 
     return () => {
+      active = false;
       cancelAnimationFrame(rafId);
-      lenis.destroy();
+      if (lenis?.destroy) lenis.destroy();
     };
   });
 </script>
 
-{@render children()}
+<slot />

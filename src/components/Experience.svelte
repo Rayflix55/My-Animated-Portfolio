@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
+  import { canUseMotion } from '../lib/motion';
   import SectionHeader from "./UI/SectionHeader.svelte";
 
-  // Data structure updated with an explicit "current" state flag
   const experience = [
     { year: "2025-2026", role: "Frontend Intern", company: "HNG", desc: "Building high-performance user interfaces and contributing to scalable modular frontend architectures.", current: false },
     { year: "2026", role: "Lead Developer", company: "Yagazie Weng Foundation", desc: "Assisting in building virtual interface components and optimizing frontend performance.", current: true },
@@ -13,6 +13,7 @@
 
   let scrollY = $state(0);
   onMount(() => {
+    if (!canUseMotion) return;
     const handleScroll = () => scrollY = window.scrollY;
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { canUseMotion } from '../lib/motion';
   import { fly, fade, scale } from 'svelte/transition';
   import { ArrowUpRight } from "lucide-svelte";
   import Button from "./UI/Button.svelte";
@@ -7,10 +8,12 @@
   let scrollY = $state(0);
   
   onMount(() => {
+    if (!canUseMotion) return;
+
     const handleScroll = () => {
       scrollY = window.scrollY;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   });
   

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { canUseMotion } from '../lib/motion';
   import { fly } from 'svelte/transition';
   import { Cpu, Zap, Globe, Layers } from "lucide-svelte";
   import SectionHeader from "./UI/SectionHeader.svelte";
@@ -9,6 +10,8 @@
   let sectionRef = $state<HTMLElement | null>(null);
 
   onMount(() => {
+    if (!canUseMotion) return;
+
     const handleScroll = () => {
       if (!sectionRef) return;
       const rect = sectionRef.getBoundingClientRect();
@@ -20,7 +23,7 @@
       scrollYProgress = Math.max(0, Math.min(1, progress));
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
@@ -28,7 +31,7 @@
   let rightY = $derived(-(scrollYProgress - 0.5) * 100);
 
   const stats = [
-    { label: "Years Experience", value: "3+", sub: "Professional focus" },
+    { label: "Years Experience", value: "2+", sub: "Professional focus" },
     { label: "Successful Projects", value: "10+", sub: "Delivered solutions" },
   ];
 
@@ -95,11 +98,17 @@
         
        <div class="pt-8 transition-transform duration-500 hover:scale-[1.1] ">
           <div class="relative w-full max-w-[420px] mx-auto aspect-square overflow-hidden rounded-2xl engineered-border">
-            <img 
-              src="/rayflix.png" 
-              alt="Akpe Samuel (Rayflix)"
-              class="w-full h-full object-cover object-top grayscale opacity-80 hover:grayscale-0 transition-all duration-700"
-            />
+            <picture>
+              <source type="image/webp" srcset="/rayflix-640.webp 640w, /rayflix.webp 1024w" sizes="(max-width: 640px) 100vw, 420px" />
+              <img 
+                src="/rayflix.png" 
+                alt="Akpe Samuel (Rayflix)"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                class="w-full h-full object-cover object-top grayscale opacity-80 hover:grayscale-0 transition-all duration-700"
+              />
+            </picture>
           </div>
         </div>
       

@@ -4,6 +4,10 @@
 
   export let project: Project;
 
+  const imageBase = project.image.replace(/\.[^/.]+$/, '');
+  const imageWebpSrcset = `${imageBase}-640.webp 640w, ${imageBase}-1024.webp 1024w, ${imageBase}.webp 1888w`;
+  const imageSizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw';
+
   function statusColor(status: string) {
     if (status === 'Live') return 'text-emerald-400 border-emerald-400/30 bg-emerald-400/5';
     if (status === 'In Progress') return 'text-amber-400 border-amber-400/30 bg-amber-400/5';
@@ -13,11 +17,17 @@
 
 <div class="group engineered-border bg-slate-950/40 backdrop-blur-md overflow-hidden transition-all duration-500 hover:scale-[1.015] active:scale-[0.99]">
   <div class="relative w-full aspect-video overflow-hidden">
-    <img
-      src={project.image}
-      alt={`${project.title} screenshot`}
-      class="w-full h-full object-cover object-top grayscale opacity-25 group-hover:opacity-95 group-hover:grayscale-0 group-hover:scale-105 group-focus-within:opacity-95 group-focus-within:grayscale-0 group-focus-within:scale-105 group-active:opacity-95 group-active:grayscale-0 group-active:scale-105 transition-all duration-1000 ease-out"
-    />
+    <picture>
+      <source type="image/webp" srcset={imageWebpSrcset} sizes={imageSizes} />
+      <img
+        src={project.image}
+        alt={`${project.title} screenshot`}
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+        class="w-full h-full object-cover object-top grayscale opacity-25 group-hover:opacity-95 group-hover:grayscale-0 group-hover:scale-105 group-focus-within:opacity-95 group-focus-within:grayscale-0 group-focus-within:scale-105 group-active:opacity-95 group-active:grayscale-0 group-active:scale-105 transition-all duration-1000 ease-out"
+      />
+    </picture>
 
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 pointer-events-none"></div>
 
@@ -34,7 +44,7 @@
       {project.index} // {project.category}
     </span>
 
-    <h3 class="text-[24px] md:text-[26px] font-display font-black uppercase tracking-tighter leading-none group-hover:text-primary transition-colors duration-300">
+    <h3 class="text-[24px] md:text-[20px] font-display font-black uppercase tracking-tighter leading-none group-hover:text-primary transition-colors duration-300">
       {project.title}
     </h3>
 

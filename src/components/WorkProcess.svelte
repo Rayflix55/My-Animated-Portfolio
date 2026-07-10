@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { canUseMotion } from '../lib/motion';
   import SectionHeader from "./UI/SectionHeader.svelte";
 
 
@@ -14,6 +15,8 @@
   let sectionRef: HTMLElement | undefined = $state();
 
   onMount(() => {
+    if (!canUseMotion) return;
+
     const handleScroll = () => {
       if (!sectionRef) return;
       const rect = sectionRef.getBoundingClientRect();
@@ -24,7 +27,7 @@
       scrollYProgress = Math.max(0, Math.min(1, progress));
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   });
 

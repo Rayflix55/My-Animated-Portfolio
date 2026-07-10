@@ -2,11 +2,9 @@
   import { onMount } from 'svelte';
   import SmoothScroll from "./components/SmoothScroll.svelte";
   import Navbar from "./components/Navbar.svelte";
-  import CustomCursor from "./components/CustomCursor.svelte";
   import ThemeToggle from "./components/ThemeToggle.svelte";
   import CommandPalette from "./components/CommandPalette.svelte";
-  import BackgroundCanvas from "./components/BackgroundCanvas.svelte";
-  import { checkHardwareCapability, prefersReducedMotion, isCapableDevice } from "./lib/motion";
+  import { checkHardwareCapability, canUseMotion } from "./lib/motion";
   import Hero from "./components/Hero.svelte";
   import AboutMe from "./components/AboutMe.svelte";
   import Experience from "./components/Experience.svelte";
@@ -19,19 +17,40 @@
   import ProjectsPage from "./pages/ProjectsPage.svelte";
   import { route, initRouter } from "./lib/router";
 
+  let BackgroundCanvasComponent: any = null;
+  let CustomCursorComponent: any = null;
+
   onMount(() => {
     checkHardwareCapability();
     initRouter();
+
+    const unsubscribe = canUseMotion.subscribe(async (value) => {
+      if (!value) return;
+      if (!BackgroundCanvasComponent) {
+        const mod = await import("./components/BackgroundCanvas.svelte");
+        BackgroundCanvasComponent = mod.default;
+      }
+      if (!CustomCursorComponent) {
+        const mod = await import("./components/CustomCursor.svelte");
+        CustomCursorComponent = mod.default;
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   });
 </script>
 
 <SmoothScroll>
-  <CustomCursor />
+  {#if CustomCursorComponent}
+    <svelte:component this={CustomCursorComponent} />
+  {/if}
   <CommandPalette />
   <ThemeToggle />
   <div class="noise-overlay"></div>
-  {#if $isCapableDevice && !$prefersReducedMotion}
-    <BackgroundCanvas />
+  {#if BackgroundCanvasComponent}
+    <svelte:component this={BackgroundCanvasComponent} />
   {/if}
 
   <div class="relative min-h-screen selection:bg-primary selection:text-black overflow-x-hidden">

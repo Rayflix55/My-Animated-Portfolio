@@ -115,6 +115,19 @@ canvas,
     display: none !important;
   }
 
+  * {
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-feedback-marquee {
+    animation: none !important;
+  }
+
   .backdrop-blur-sm,
   .backdrop-blur-md,
   .backdrop-blur-lg,
